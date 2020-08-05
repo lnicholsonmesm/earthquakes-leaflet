@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>GeoJSON tutorial - Leaflet</title>
+
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="https://leafletjs.com/examples/geojson/docs/images/favicon.ico">
+
+    <link rel="stylesheet" href="./GeoJSON tutorial - Leaflet_files/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
+    <script src="./GeoJSON tutorial - Leaflet_files/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		#map {
+			width: 600px;
+			height: 400px;
+		}
+	</style>
+
+	
+</head>
+<body class="">
+
+<div id="map" class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" tabindex="0" style="position: relative; outline: none;"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-7px, -34px, 0px);"><div class="leaflet-pane leaflet-tile-pane"><div class="leaflet-layer " style="z-index: 1; opacity: 1;"><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 17; transform: translate3d(-263px, -216px, 0px) scale(2);"></div><div class="leaflet-tile-container leaflet-zoom-animated" style="z-index: 18; transform: translate3d(-263px, -216px, 0px) scale(1);"><img alt="" role="presentation" src="./GeoJSON tutorial - Leaflet_files/3108" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(258px, -14px, 0px); opacity: 1;"><img alt="" role="presentation" src="./GeoJSON tutorial - Leaflet_files/3109" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(258px, 498px, 0px); opacity: 1;"><img alt="" role="presentation" src="./GeoJSON tutorial - Leaflet_files/3108(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-254px, -14px, 0px); opacity: 1;"><img alt="" role="presentation" src="./GeoJSON tutorial - Leaflet_files/3108(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(770px, -14px, 0px); opacity: 1;"><img alt="" role="presentation" src="./GeoJSON tutorial - Leaflet_files/3109(1)" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(-254px, 498px, 0px); opacity: 1;"><img alt="" role="presentation" src="./GeoJSON tutorial - Leaflet_files/3109(2)" class="leaflet-tile leaflet-tile-loaded" style="width: 512px; height: 512px; transform: translate3d(770px, 498px, 0px); opacity: 1;"></div></div></div><div class="leaflet-pane leaflet-shadow-pane"></div><div class="leaflet-pane leaflet-overlay-pane"><svg pointer-events="none" class="leaflet-zoom-animated" width="720" height="480" viewBox="-53 -6 720 480" style="transform: translate3d(-53px, -6px, 0px);"><g><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M330,189a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M348,141a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M370,230a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M374,147a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M406,180a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M429,248a8,8 0 1,0 16,0 a8,8 0 1,0 -16,0 "></path><path class="leaflet-interactive" stroke="#000" stroke-opacity="1" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="#ff7800" fill-opacity="0.8" fill-rule="evenodd" d="M0 0"></path><path class="leaflet-interactive" stroke="#999" stroke-opacity="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#B0DE5C" fill-opacity="0.8" fill-rule="evenodd" d="M286 186L253 203L212 242L197 253L221 285L248 288L325 288L329 286L334 268L328 255L325 241L325 227L322 216L315 204zM294 243L301 255L311 249L303 238zM227 299L227 311L257 309L316 312L332 311L332 300L274 299z"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M297 87L327 117"></path><path class="leaflet-interactive" stroke="#3388ff" stroke-opacity="1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M357 149L489 281"></path></g></svg></div><div class="leaflet-pane leaflet-marker-pane"><img src="./GeoJSON tutorial - Leaflet_files/baseball-marker.png" class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="" tabindex="0" style="margin-left: -16px; margin-top: -37px; width: 32px; height: 37px; transform: translate3d(406px, 51px, 0px); z-index: 51;"></div><div class="leaflet-pane leaflet-tooltip-pane"></div><div class="leaflet-pane leaflet-popup-pane"><div class="leaflet-popup  leaflet-zoom-animated" style="opacity: 1; transform: translate3d(263px, 219px, 0px); bottom: -7px; left: -171px;"><div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 301px;"><p>I started out as a GeoJSON MultiPolygon, but now I'm a Leaflet vector!</p>This is the Auraria West Campus</div></div><div class="leaflet-popup-tip-container"><div class="leaflet-popup-tip"></div></div><a class="leaflet-popup-close-button" href="https://leafletjs.com/examples/geojson/example.html#close">×</a></div></div><div class="leaflet-proxy leaflet-zoom-animated" style="transform: translate3d(873784px, 1.59176e+06px, 0px) scale(8192);"></div></div><div class="leaflet-control-container"><div class="leaflet-top leaflet-left"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><a class="leaflet-control-zoom-in" href="https://leafletjs.com/examples/geojson/example.html#" title="Zoom in" role="button" aria-label="Zoom in">+</a><a class="leaflet-control-zoom-out" href="https://leafletjs.com/examples/geojson/example.html#" title="Zoom out" role="button" aria-label="Zoom out">−</a></div></div><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JS library for interactive maps">Leaflet</a> | Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a></div></div></div></div>
+
+<script src="./GeoJSON tutorial - Leaflet_files/sample-geojson.js" type="text/javascript"></script>
+
+<script>
+	var map = L.map('map').setView([39.74739, -105], 13);
+
+	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/light-v9',
+		tileSize: 512,
+		zoomOffset: -1
+	}).addTo(map);
+
+	var baseballIcon = L.icon({
+		iconUrl: 'baseball-marker.png',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	});
+
+	function onEachFeature(feature, layer) {
+		var popupContent = "<p>I started out as a GeoJSON " +
+				feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+
+		if (feature.properties && feature.properties.popupContent) {
+			popupContent += feature.properties.popupContent;
+		}
+
+		layer.bindPopup(popupContent);
+	}
+
+	L.geoJSON([bicycleRental, campus], {
+
+		style: function (feature) {
+			return feature.properties && feature.properties.style;
+		},
+
+		onEachFeature: onEachFeature,
+
+		pointToLayer: function (feature, latlng) {
+			return L.circleMarker(latlng, {
+				radius: 8,
+				fillColor: "#ff7800",
+				color: "#000",
+				weight: 1,
+				opacity: 1,
+				fillOpacity: 0.8
+			});
+		}
+	}).addTo(map);
+
+	L.geoJSON(freeBus, {
+
+		filter: function (feature, layer) {
+			if (feature.properties) {
+				// If the property "underConstruction" exists and is true, return false (don't render features under construction)
+				return feature.properties.underConstruction !== undefined ? !feature.properties.underConstruction : true;
+			}
+			return false;
+		},
+
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+	var coorsLayer = L.geoJSON(coorsField, {
+
+		pointToLayer: function (feature, latlng) {
+			return L.marker(latlng, {icon: baseballIcon});
+		},
+
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+</script>
+
+
+
+
+
+</body></html>
