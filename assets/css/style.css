@@ -1,9 +1,10 @@
 html,
 body {
-  padding-top: 5rem;
+  padding-top: 3rem;
+  padding-bottom: 1rem;
 }
 .starter-template {
-  padding: 3rem 1.5rem;
+  padding: 1.5rem 1rem;
   text-align: center;
 }
 
@@ -14,7 +15,19 @@ body {
   padding: 0;
   margin: 0;
 }
-
+/*
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+*/
 .legend {
   padding: 10px;
   font-family: Sanchez, serif;
