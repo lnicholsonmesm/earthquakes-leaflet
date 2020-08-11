@@ -58,12 +58,20 @@ d3.json(url).then(function (response) {
       //console.log(data.geometry.coordinates[0]);
       return L.circleMarker({ lon: less, lat: data.geometry.coordinates[1] }, {
         radius: data.properties.mag * data.properties.mag / (0.5 + 0.4 * data.properties.mag),
+        onEachFeature: rainbows,
         fillColor: getColor(parseFloat(data.properties.mag)),
         color: '#0185aa',
         weight: 0.6,
         opacity: 0.7,
         fillOpacity: 0.8
-      }).addTo(map);
+      }).addTo(map)
+      /*.bindPopup("<ul><li>Magnitude: " +
+        feature.properties.mag + "</li>" +
+        "<li>Depth: " +
+        feature.properties.mag + " " + feature.properties.magType + "</li>" +
+        "<li>TsunamiPotential: " +
+        feature.properties.tsunami + "</li>" +
+        "</ul>");*/
     }
   });
   console.log(response);
@@ -75,7 +83,7 @@ d3.json(url).then(function (response) {
     style: function (feature) {
       return feature.properties && feature.properties.style;
     },
-    onEachFeature: onEachFeature,
+    onEachFeature: rainbows,
     pointToLayer: function (feature, latlng) {
       return L.circleMarker(latlng, {
         radius: feature.properties.mag * feature.properties.mag / (0.5 + 0.4 * feature.properties.mag),
@@ -91,29 +99,29 @@ d3.json(url).then(function (response) {
     }
 
   });
-  /*
+
   // Set up the legend
   var legend = L.control({ position: "bottomright" });
   legend.onAdd = function () {
     var div = L.DomUtil.create("div", "info legend");
-    var limits = geojson.options.limits;
-    var colors = geojson.options.colors;
+    //var limits = geojson.options.limits;
+    var colors = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
+    var breaks = ['8.5+', '6.0', '4.5', '2.5', '1.0'];
+    var colorLabels = [];
     var labels = [];
-    // Add min & max
-    var legendInfo = "<h1>Earthquake Magnitude</h1>" +
-      "<div class=\"labels\">" +
-      "<div class=\"min\">" + limits[0] + "</div>" +
-      "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-      "</div>";
-    div.innerHTML = legendInfo;
-    limits.forEach(function (limit, index) {
-      labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+    div.innerHTML = "";
+    //div.innerHTML = "<p>Magnitude</p>";
+    breaks.forEach(function (limit, index) {
+      colorLabels.push('<i style="background:' + colors[index] + ';"></i>' + ' ' + breaks[index]);
+      labels.push(' ' + breaks[index] + ' ');
     });
-    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    div.innerHTML += colorLabels.join("<br>");
+    //div.innerHTML += "<br>"
+    //div.innerHTML += labels.join("");
     return div;
   };
   //Adding legend to the map
-  legend.addTo(myMap); */
+  legend.addTo(map);
 });
 /*
 legend.onAdd = function (map) {
@@ -130,67 +138,7 @@ legend.onAdd = function (map) {
   }
 
   return div;
-};
 
-legend.addTo(map);
-*/
-
-
-// // Set up the legend
-// var legend = L.control({ position: "bottomright" });
-// legend.onAdd = function () {
-//   var div = L.DomUtil.create("div", "info legend");
-//   var limits = geojson.options.limits;
-//   var colors = geojson.options.colors;
-//   var labels = [];
-//   // Add min & max
-//   var legendInfo = "<h1>Median Income</h1>" +
-//     "<div class=\"labels\">" +
-//     "<div class=\"min\">" + limits[0] + "</div>" +
-//     "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-//     "</div>";
-//   div.innerHTML = legendInfo;
-//   limits.forEach(function (limit, index) {
-//     labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
-//   });
-//   div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-//   return div;
-//};
-// Adding legend to the map
-//legend.addTo(myMap);
-//});
-/*
-data.features.properties.mag
-data.features.properties.time
-data.features.properties.detail
-data.features.properties.place
-data.features.properties.tsunami //tsunami risk
-*/
-
-/* ______*3. ADD MARKERS/ETC *_________*_________*_________*_________*________*/
-/*
-var marker = L.marker([20.5, -200.09]).addTo(map);
-var circle = L.circle([20.508, -220.11], {
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5,
-  radius: 1000
-}).addTo(map);
-var polygon = L.polygon([
-  [20.509, -159.08],
-]).addTo(map);
-*/
-
-/* ______*4. ADD POPUPS TEXT *_________*_________*_________*_________*________*/
-//.openPopup(); //openPopup only works for markers! //it overrides your map geo defaults
-//circle.bindPopup("I am a circle.");
-//polygon.bindPopup("I am a polygon.");
-
-// Can add a popup as a layer:
-//var popup = L.popup()
-//  .setLatLng([20, -159.09])
-//  .setContent("I am a standalone popup.")
-//.openOn(map); // openOn > "addTo" because it closes previously open popup
 
 /* ______*5. EVENT HANDLING  *_________*_________*_________*_________*________*/
 function highlightFeature(e) {
@@ -207,28 +155,7 @@ function highlightFeature(e) {
     layer.bringToFront();
   }
 };
-/*
-var geojson;
-// ... our listeners
-geojson = L.geoJson(...);
-function resetHighlight(e) {
-  geojson.resetStyle(e.target);
-}
 
-function onEachFeature(feature, layer) {
-  layer.on({
-    mouseover: highlightFeature,
-    mouseout: resetHighlight,
-    click: zoomToFeature
-  });
-}
-
-geojson = L.geoJson(statesData, {
-  style: style,
-  onEachFeature: onEachFeature
-}).addTo(map);
-*/
-//For this to work, make sure our GeoJSON layer is accessible through the geojson variable by defining it before our listeners and assigning the layer to it later
 
 // make it a popup:
 var popup = L.popup();
@@ -240,10 +167,17 @@ function onMapClick(e) {
     .openOn(map);
 }
 
-//map.on('click', onMapClick);
-function onEachFeature(feature, layer) {
-  var popupContent = "<p>I started out as a GeoJSON " +
-    feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+map.on('click', onMapClick);
+
+function rainbows(feature, layer) {
+  var popupContent = "<ul><li>Magnitude: " +
+    feature.properties.mag + "</li>" +
+    "<li>Depth: " +
+    feature.properties.mag + " " + feature.properties.magType + "</li>" +
+    "<li>TsunamiPotential: " +
+    feature.properties.tsunami + "</li>" +
+    "</ul>"
+    ;
 
   if (feature.properties && feature.properties.popupContent) {
     popupContent += feature.properties.popupContent;
